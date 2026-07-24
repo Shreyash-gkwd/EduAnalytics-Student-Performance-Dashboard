@@ -56,7 +56,7 @@ Source: [Kaggle](https://www.kaggle.com/datasets/aljarah/xAPI-Edu-Data)
 
 ## Dashboard Preview
 
-<img src="Dashboard_images/Dashboard.png" width="900"/>
+<img src="images/dashboard_overview.png" width="900"/>
 
 ## Key Insights
 
