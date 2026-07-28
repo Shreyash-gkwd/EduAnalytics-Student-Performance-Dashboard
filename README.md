@@ -1,80 +1,184 @@
-# EduAnalytics — Student Performance Analytics Dashboard
+# 🎓 EduAnalytics: Student Performance Dashboard
 
-A data analytics project that analyzes student academic and engagement data to identify performance trends and flag at-risk students, using **Python** for data processing and **Power BI** for interactive visualization.
+An end-to-end Data Analytics project built using Python and Power BI to analyze student engagement, attendance, and academic performance.
 
-## Overview
+The goal of this project was to practice the complete data analytics workflow—from data cleaning and feature engineering to building an interactive dashboard that presents meaningful insights.
 
-This project analyzes student academic datasets — attendance, grades, and engagement metrics (participation, resource usage, discussion activity) — to:
-- Identify performance trends across students, subjects, semesters, and grade levels
-- Building an interactive dashboard for class-wise and student-wise monitoring
-- Flag at-risk students using rule-based logic on attendance and engagement patterns
-- Presenting findings in a clear, easy-to-understand visual format
+---
 
-## Dataset
+## 📌 Project Objective
 
-**Students' Academic Performance Dataset (xAPI-Edu-Data)**
-Source: [Kaggle](https://www.kaggle.com/datasets/aljarah/xAPI-Edu-Data)
+The xAPI Educational Dataset contains information about students' classroom participation, attendance, and academic performance.
 
-480 student records with 17 features collected from the Kalboard 360 learning management system via the Experience API (xAPI), including demographic info, academic background (grade, section, subject, semester), behavioral/engagement metrics, and final performance class.
+The objective of this project was to:
 
-## Tech Stack
+- Clean and prepare the dataset for analysis
+- Create meaningful features for easier interpretation
+- Explore relationships between engagement, attendance, and performance
+- Build an interactive Power BI dashboard to present the findings
 
-- **Python** — Pandas, NumPy (data cleaning, feature engineering, trend analysis)
-- **Power BI** — interactive dashboard and visualizations
+---
 
-## Project Workflow
+## 🛠 Tech Stack
 
-1. **Data Loading & Cleaning** — loaded the raw CSV, checked for missing values, standardized column names
-2. **Feature Engineering**
-   - `EngagementScore` — combined average of raised-hands, resources visited, announcements viewed, and discussion participation (0–100 scale)
-   - `AttendanceRisk` — binary flag derived from `StudentAbsenceDays`
-   - `PerformanceProxy` — numeric proxy mapped from performance class (Low / Medium / High)
-3. **Trend Analysis** — aggregated engagement and performance by subject, semester, and grade level to surface patterns
-4. **At-Risk Flagging** — rule-based logic: a student is flagged **At Risk** if they have high absences (>7 days), below-median engagement, and are not already a high performer
-5. **Export** — cleaned, feature-engineered dataset exported to CSV for Power BI
-6. **Dashboard** — built an interactive Power BI report with KPI cards, subject/semester trend charts, an engagement-vs-performance scatter plot, an at-risk student watchlist table, and slicers for filtering by gender, topic, semester, and grade
+- Python
+- Pandas
+- Matplotlib
+- Jupyter Notebook
+- Power BI
+- DAX
 
-## Repository Contents
+---
 
-| File | Description |
-|---|---|
-| `EduAnalytics.ipynb` | Jupyter Notebook containing data cleaning, feature engineering, trend analysis, and data export |
-| `edu_analytics_processed.csv` | Cleaned, feature-engineered dataset used as the Power BI data source |
-| `Student Performance Dashboard.pbix` | Power BI dashboard file |
-| `Dashboard_images/` | Dashboard preview images |
+## 📂 Project Workflow
 
-## How to Run
+1. Data Collection
+2. Data Cleaning
+3. Feature Engineering
+4. Exploratory Data Analysis (EDA)
+5. Export Processed Dataset
+6. Power BI Dashboard Development
+7. Insights & Recommendations
 
-1. Download `xAPI-Edu-Data.csv` from the [Kaggle dataset page](https://www.kaggle.com/datasets/aljarah/xAPI-Edu-Data) and place it in the project folder.
-2. Install dependencies:
-   ```bash
-   pip install pandas numpy
-   ```
-3. Open `EduAnalytics.ipynb` in Jupyter Notebook or JupyterLab and run all cells sequentially.
-   This prints subject/semester/grade-level trends and at-risk summary to the console, and exports `edu_analytics_processed.csv`.
-4. Open `Student Performance Dashboard.pbix` in Power BI Desktop, or load `edu_analytics_processed.csv` into a new Power BI report.
+---
 
-## Dashboard Preview
+## ⚙️ Feature Engineering
 
-<img src="images/dashboard_overview.png" width="900"/>
+The original dataset contained several engagement-related columns and categorical performance labels. To simplify analysis, the following features were created:
 
-## Key Insights
+### 📊 Engagement Score
 
-- Approximately 31% of students were identified as **At Risk** based on attendance and engagement criteria.
-- Higher student engagement was generally associated with better academic performance.
-- Performance varied across subjects, highlighting areas where additional academic support may be beneficial.
-- Students with frequent absences (>7 days) were more likely to fall into the at-risk category.
-- Interactive slicers allow users to analyze trends by gender, semester, topic, and grade level.
+A single engagement metric created by averaging:
 
-## Future Improvements
+- Raised Hands
+- Visited Resources
+- Announcements View
+- Discussion Participation
 
-- Integrate real-time student data through an LMS or database connection.
-- Replace rule-based at-risk flagging with a machine learning classification model
-- Add time-series tracking if multi-semester longitudinal data becomes available
-- Build automated alerts/reports for flagged students
+This combines four engagement indicators into one score (0–100), making it easier to compare students.
 
-## Author
+---
 
-Shreyash S. Gaikwad
+### 🚩 Attendance Risk
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shreyash-gaikwad-66154a286)
+Students with more than seven absence days were flagged as:
+
+- **1 → At Risk**
+- **0 → Not At Risk**
+
+This simplifies attendance analysis within the dashboard.
+
+---
+
+### 🎯 Performance Proxy
+
+The original performance classes (L, M, H) were converted into numerical values.
+
+| Class | Score |
+|------|------:|
+| L | 50 |
+| M | 80 |
+| H | 95 |
+
+This allows average performance to be calculated and compared across different groups.
+
+---
+
+### ⚠️ Risk Status
+
+Students were classified as **At Risk** if they met all of the following conditions:
+
+- High attendance risk (more than 7 absence days)
+- Below-median engagement
+- Low or Medium academic performance
+
+Otherwise, they were classified as **On Track**.
+
+---
+
+## 📊 Dashboard Pages
+
+### 📈 Page 1 – Executive Dashboard
+
+Provides a high-level overview of:
+
+- Total Students
+- At Risk Percentage
+- Average Performance by Subject
+- Student Risk by Subject
+- Engagement vs Performance
+- Risk Status Distribution
+- Grade Performance & Risk Summary
+- Interactive Filters
+
+---
+
+### 📚 Page 2 – Performance Analysis
+
+Focuses on:
+
+- Average Engagement by Gender
+- Average Performance by Semester
+- Average Performance by GradeID
+- Performance Matrix by Subject and Grade  
+- Average Engagement by Subject
+
+---
+
+### 🚨 Page 3 – Student Risk Analysis
+
+Provides a deeper analysis of:
+
+- At Risk Students by Gender
+- At Risk Students by Grade
+- Attendance Risk Distribution
+- Student Absence by Subject
+- Detailed At Risk Student Table
+
+---
+
+## 📈 Key Insights
+
+- Approximately **31%** of students were identified as **At Risk**.
+- Students with higher engagement generally achieved better academic performance.
+- Student engagement varied across different academic subjects.
+- Attendance was an important factor in identifying students who may require additional support.
+
+---
+
+## 💡 Recommendations
+
+Based on the dashboard findings:
+
+- Monitor students with low engagement and high absence at an early stage.
+- Increase classroom participation in subjects with lower engagement scores.
+- Provide targeted academic support for students identified as "At Risk."
+- Track engagement metrics regularly to identify performance trends before academic outcomes decline.
+- Use dashboard insights to support data-driven interventions by educators.
+
+---
+
+## 📷 Dashboard Preview
+
+<h3>📈 Executive Dashboard</h3>
+<img src="images/dashboard_overview.png" width="700">
+
+Additional report pages include:
+
+- 📚 Performance Analysis
+- 🚨 Student Risk Analysis
+
+See the Power BI (.pbix) file for the complete interactive report.
+## 📚 Dataset
+
+**Dataset:** xAPI Educational Dataset
+
+**Source:** https://www.kaggle.com/datasets/aljarah/xAPI-Edu-Data
+
+---
+
+## 👨‍💻 Author
+
+**Shreyash**
+
+LinkedIn: https://www.linkedin.com/in/shreyash-gaikwad-66154a286
