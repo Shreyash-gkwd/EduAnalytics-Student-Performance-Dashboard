@@ -179,6 +179,6 @@ See the Power BI (.pbix) file for the complete interactive report.
 
 ## 👨‍💻 Author
 
-**Shreyash**
+**Shreyash S. Gaikwad**
 
 LinkedIn: https://www.linkedin.com/in/shreyash-gaikwad-66154a286
